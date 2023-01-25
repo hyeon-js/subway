@@ -101,7 +101,23 @@
     </div>
     <script>
         function loadData(e) {
-            alert(e.innerHTML);
+            var lineId = name2id(e.innerHTML);
+            alert(lineId);
+            
+        }
+
+        function name2id(name) {
+            const lines = {};
+            lines['1호선'] = 1001;
+            lines['2호선'] = 1002;
+            lines['3호선'] = 1003;
+            lines['4호선'] = 1004;
+            lines['5호선'] = 1005;
+            lines['6호선'] = 1006;
+            lines['7호선'] = 1007;
+            lines['8호선'] = 1008;
+            lines['9호선'] = 1009;
+            return lines[name] === undefined ? null : lines[name];
         }
     </script>
 </body>

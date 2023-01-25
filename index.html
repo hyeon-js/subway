@@ -108,7 +108,7 @@
                 return;
             }
 
-            fetch('https://hyeonjs.com/api/subway?region=seoul&line=' + lineId)
+            fetch('https://api.hyeonjs.com/subway?region=seoul&line=' + lineId)
                 .then((response) => response.json())
                 .then((data) => {
                     data = JSON.stringify(data);

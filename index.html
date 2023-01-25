@@ -27,6 +27,24 @@
         div.body {
             padding: 80px 20px 5px 20px;
             font-size: 18px;
+            margin: auto;
+            max-width: 1080px;
+        }
+        table {
+            color: #000000;
+            border: 1px solid #000000;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            border: 1px solid #000000;
+            text-align: center;
+            font-size: 20x;
+            padding: 4px;
+            width: 33%;
+        }
+        p {
+            font-size: 13px;
         }
     </style>
 </head>
@@ -36,8 +54,56 @@
         전철 운행 정보
     </div>
     <div class=body>
-        test
+        <table class=line_list>
+            <tr>
+                <td onclick='loadData(this);'>1호선</td>
+                <td onclick='loadData(this);'>2호선</td>
+                <td onclick='loadData(this);'>3호선</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>4호선</td>
+                <td onclick='loadData(this);'>5호선</td>
+                <td onclick='loadData(this);'>6호선</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>7호선</td>
+                <td onclick='loadData(this);'>8호선</td>
+                <td onclick='loadData(this);'>9호선</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>경의중앙선</td>
+                <td onclick='loadData(this);'>수인분당선</td>
+                <td onclick='loadData(this);'>신분당선</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>경춘선</td>
+                <td onclick='loadData(this);'>경강선</td>
+                <td onclick='loadData(this);'>서해선</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>우이신설선</td>
+                <td onclick='loadData(this);'>용인경전철</td>
+                <td onclick='loadData(this);'>의정부경전철</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>인천1호선</td>
+                <td onclick='loadData(this);'>인천2호선</td>
+                <td onclick='loadData(this);'>공항철도</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this);'>신림선</td>
+                <td onclick='loadData(this);'>김포도시철도</td>
+                <td onclick='loadData(this);'>&nbsp;</td>
+            </tr>
+        </table>
+        <hr>
+        <p>© 2023 Hyeon.js, All rights reserved.</p>
     </div>
+    <script>
+        function loadData(e) {
+            alert(e.innerHTML);
+        }
+    </script>
 </body>
 
 </html>

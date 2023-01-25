@@ -6,6 +6,7 @@
     <meta name='description' content='전동열차 운행 정보' />
     <meta property='og:title' content='전철 운행 정보' />
     <meta property='og:description' content='전동열차 운행 정보' />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>
         전철 운행 정보
     </title>
@@ -102,10 +103,19 @@
     <script>
         function loadData(e) {
             var lineId = name2id(e.innerHTML);
-            alert(lineId);
-            
-        }
+            if (lineId == null) {
+                alert('아직 정보를 지원하지 않는 노선입니다');
+                return;
+            }
 
+            fetch('https://hyeonjs.com/api/subway?region=seoul&line=' + lineId)
+                .then((response) => response.json())
+                .then((data) => {
+                    data = JSON.stringify(data);
+                    alert(data);
+                });
+        }
+            
         function name2id(name) {
             const lines = {};
             lines['1호선'] = 1001;

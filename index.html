@@ -28,7 +28,7 @@
             width: 100%;
             position: fixed;
             color: #FFFFFF;
-            font-size: 23px;
+            font-size: 22px;
             text-align: left;
         }
         div.body {
@@ -141,12 +141,10 @@
                 return;
             }
 
-            let map = drawMap(lineId);
-
             fetch('https://api.hyeonjs.com/subway?region=seoul&line=' + lineId)
                 .then((response) => response.json())
                 .then((data) => {
-                    drawTrains(map, data, lineId);
+                    createMap(data, lineId);
                 });
         }
             
@@ -164,23 +162,12 @@
             return lines[name] === undefined ? null : lines[name];
         }
 
-        function drawMap(lineId) {
-            let src = '<svg viewBox="0 0 800 ' + mapData[lineId].height + '">';
-                mapData[lineId].lines.forEach((e) => {
-                src += '<' + e.type + ' points="' + e.data + '" fill="none" stroke="' + mapData[lineId].color + '" />';
-            });
-            mapData[lineId].points.forEach((e) => {
-                src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
-                src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
-            });
-            return src;
-        }
-
-        function drawTrains(map, data, lineId) {
+        function createMap(data, lineId) {
             if (data.error) {
                 alert('전철 운행 정보를 불러오지 못했어요');
                 return;
             }
+            const map = drawMap(lineId, data.data);
             let src = '';
             data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
@@ -192,6 +179,48 @@
                 }
             })
             document.getElementById("subway_map").innerHTML = map + src;
+        }
+
+        function drawMap(lineId, data) {
+            if (!mapData[lineId]) mapData[lineId] = createMapData(data, lineId);
+            let src = '<svg viewBox="0 0 800 ' + mapData[lineId].height + '">';
+                mapData[lineId].lines.forEach((e) => {
+                src += '<' + e.type + ' points="' + e.data + '" fill="none" stroke="' + mapData[lineId].color + '" />';
+            });
+            mapData[lineId].points.forEach((e) => {
+                src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
+                src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+            });
+            return src;
+        }
+
+        function createMapData(data, lineId) {
+            const colors = [];
+            colors['1003'] = '#EF7C1C';
+            colors['1004'] = '#00A4E3';
+            colors['1005'] = '#996CAC';
+            colors['1007'] = '#747F00';
+            colors['1008'] = '#E6186C';
+            colors['1009'] = '#BDB092';
+            const color = colors[lineId] ? colors[lineId] : '#000000';
+
+            const result = {};
+            result.color = color;
+            result.height = data.length * 100 + 100;
+            result.lines = [{
+                type: 'polyline',
+                data: '100,100 100,' + (result.height - 100)
+            }];
+            result.points = [];
+            data.forEach((e, i) => {
+                result.points[i] = {
+                    x: 100,
+                    y: i * 100 + 100,
+                    sta: e.stn
+                };
+            });
+
+            return result;
         }
 
     </script>

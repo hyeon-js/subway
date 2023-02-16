@@ -69,7 +69,7 @@
         div.subway_map {
             width: 100%;
             height: auto;
-		    max-width: 800px;
+            max-width: 800px;
         }
     </style>
 </head>
@@ -182,7 +182,12 @@
                 mapData[lineId].lines.forEach((e) => {
                 src += '<' + e.type + ' points="' + e.data + '" fill="none" stroke="' + mapData[lineId].color + '" />';
             });
-            mapData[lineId].points.forEach((e) => {
+            if (lineId == 1002) mapData[lineId].points.forEach((e) => {
+                if (e.sta.endsWith('(지선)')) return;
+                src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
+                src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+            });
+            else mapData[lineId].points.forEach((e) => {
                 src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
                 src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
             });

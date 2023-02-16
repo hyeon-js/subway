@@ -66,6 +66,9 @@
             text-anchor: start;
             dominant-baseline: middle;
         }
+        text.sub {
+            font-size: 24px;
+        }
         div.subway_map {
             width: 100%;
             height: auto;
@@ -183,9 +186,13 @@
                 src += '<' + e.type + ' points="' + e.data + '" fill="none" stroke="' + mapData[lineId].color + '" />';
             });
             if (lineId == 1002) mapData[lineId].points.forEach((e) => {
-                if (e.sta.endsWith('(지선)')) return;
-                src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
-                src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+                if (e.sta=='(지선)') {
+					src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="10" />';
+					src += '<text class=sub x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+				} else{
+					src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
+					src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+				}
             });
             else mapData[lineId].points.forEach((e) => {
                 src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
@@ -402,13 +409,13 @@
                 {x: 100, y: 700, sta: '한양대'},
                 {x: 100, y: 600, sta: '뚝섬'},
 
-                {x: 100, y: 500, sta: '성수 (지선)'},
+                {x: 100, y: 470, sta: '(지선)'}, //성수
                 {x: 100, y: 400, sta: '용답'},
                 {x: 100, y: 300, sta: '신답'},
                 {x: 100, y: 200, sta: '용두'},
                 {x: 100, y: 100, sta: '신설동'},
 
-                {x: 100, y: 2500, sta: '신도림 (지선)'},
+                {x: 100, y: 2530, sta: '(지선)'}, //신도림
                 {x: 100, y: 2600, sta: '도림천'},
                 {x: 100, y: 2700, sta: '양천구청'},
                 {x: 100, y: 2800, sta: '신정네거리'},

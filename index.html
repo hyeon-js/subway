@@ -188,12 +188,12 @@
             });
             if (lineId == 1002) mapData[lineId].points.forEach((e) => {
                 if (e.sta=='(지선)') {
-					src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="10" />';
-					src += '<text class=sub x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
-				} else{
-					src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
-					src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
-				}
+                    src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="10" />';
+                    src += '<text class=sub x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+                } else{
+                    src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
+                    src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+                }
             });
             else mapData[lineId].points.forEach((e) => {
                 src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';

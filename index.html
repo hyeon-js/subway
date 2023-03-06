@@ -166,6 +166,7 @@
             lines['경강선'] = 1107;
             lines['우이신설선'] = 1108;
             lines['서해선'] = 1109;
+            // lines['김포도시철도'] = 1110; 시간표 변경으로 인해 백-엔드 다시 구축 필요
             return lines[name] === undefined ? null : lines[name];
         }
 
@@ -226,6 +227,7 @@
             colors['1107'] = '#0054A6';
             colors['1108'] = '#B7C450';
             colors['1109'] = '#8FC31F';
+            colors['1110'] = '#AD8605';
             const color = colors[lineId] ? colors[lineId] : '#000000';
 
             const result = {};

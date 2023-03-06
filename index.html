@@ -168,6 +168,9 @@
             lines['서해선'] = 1109;
             // lines['김포도시철도'] = 1110; 시간표 변경으로 인해 백-엔드 다시 구축 필요
             lines['신림선'] = 1111;
+            lines['공항철도'] = 1500;
+            lines['인천1호선'] = 1501;
+            lines['인천2호선'] = 1502;
             return lines[name] === undefined ? null : lines[name];
         }
 
@@ -230,6 +233,9 @@
             colors['1109'] = '#8FC31F';
             colors['1110'] = '#AD8605';
             colors['1111'] = '#6789CA';
+            colors['1500'] = '#0090D2';
+            colors['1501'] = '#759CCE';
+            colors['1502'] = '#F5A251';
             const color = colors[lineId] ? colors[lineId] : '#000000';
 
             const result = {};

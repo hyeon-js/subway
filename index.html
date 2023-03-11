@@ -183,7 +183,7 @@
             let src = '';
             if (lineId == 1002) data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
-                if (i < 44) {
+                if (43 <= i <= 47) { //성수지선 역주행 대응
                     if (e.dn) {
                         src += '<image xlink:href="./images/up.png" x="' + (pos.x - 30) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';
                     }

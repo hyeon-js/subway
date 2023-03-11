@@ -181,7 +181,23 @@
             }
             const map = drawMap(lineId, data.data);
             let src = '';
-            data.data.forEach((e, i) => {
+            if (lineId == 1002) data.data.forEach((e, i) => {
+                const pos = mapData[lineId].points[i];
+				if(i<44) {
+                if (e.dn) {
+                    src += '<image xlink:href="./images/up.png" x="' + (pos.x - 30) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';
+                }
+                if (e.up) {
+                    src += '<image xlink:href="./images/dn.png" x="' + (pos.x + 10) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';
+                }}else{
+                if (e.up) {
+                    src += '<image xlink:href="./images/up.png" x="' + (pos.x - 30) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';
+                }
+                if (e.dn) {
+                    src += '<image xlink:href="./images/dn.png" x="' + (pos.x + 10) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';
+                }}
+            })
+            else data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
                 if (e.up) {
                     src += '<image xlink:href="./images/up.png" x="' + (pos.x - 30) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';

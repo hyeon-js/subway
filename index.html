@@ -188,6 +188,7 @@
                 .then((data) => {
                     createMap(data, lineId);
                 });
+            document.querySelector('div.drawer').style.maxHeight = '0px';
         }
             
         function name2id(name) {

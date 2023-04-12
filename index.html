@@ -7,6 +7,7 @@
     <meta property='og:title' content='전철 운행 정보' />
     <meta property='og:description' content='전동열차 운행 정보' />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>
         전철 운행 정보
     </title>
@@ -16,6 +17,7 @@
             text-align: center;
             background-color: white;
         }
+
         div.header {
             background: #000000;
             padding: 13px;
@@ -25,6 +27,29 @@
             color: #FFFFFF;
             font-size: 22px;
             text-align: left;
+            z-index: 3;
+        }
+        div.header > a > i {
+            position: relative;
+            top: 3px;
+        }
+        
+        div.drawer {
+            margin: 0px;
+            background-color: #616161;
+            color: white;
+            max-height: 0px;
+            height: auto;
+            width: 100%;
+            position: fixed;
+            transition: 0.5s;
+            overflow: hidden;
+            box-shadow: 0px 40px 50px 0px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+        div.drawer_inner {
+            padding: 60px 8px 8px 8px;
+            margin: 0px;
         }
         div.body {
             padding: 80px 20px 5px 20px;
@@ -37,6 +62,8 @@
             border: 1px solid #000000;
             border-collapse: collapse;
             width: 100%;
+            color: white;
+            font-size: 16px;
         }
         td {
             border: 1px solid #000000;
@@ -80,9 +107,13 @@
 <body>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <div class=header>
+        <a id="menu" onclick="openMenu();">
+            <i class="material-icons">&#xE5D2;</i>
+        </a>
         전철 운행 정보
     </div>
-    <div class=body>
+    <div class=drawer>
+        <div class=drawer_inner>
         <table class=line_list>
             <tr>
                 <td onclick='loadData(this);'>1호선</td>
@@ -125,6 +156,9 @@
                 <td onclick='loadData(this);'>&nbsp;</td>
             </tr>
         </table>
+        </div>
+    </div>
+    <div class=body>
         <div class="subway_map" id="subway_map">
             <!-- Subway Map will be created via JS -->
         </div>
@@ -132,6 +166,16 @@
         <p>© 2023 Hyeon.js, All rights reserved.</p>
     </div>
     <script>
+        var isOpened = false;
+        function openMenu() {
+            if (isOpened) {
+                document.querySelector('div.drawer').style.maxHeight = '0px';
+            } else {
+                document.querySelector('div.drawer').style.maxHeight = '100vw';
+            }
+            isOpened = !isOpened;
+        }
+
         function loadData(e) {
             const lineId = name2id(e.innerHTML);
             if (lineId == null) {

@@ -3,4 +3,3 @@
 
 - 완성되면 [Project JS](https://github.com/hyeon-js/ProjectJS)로 편입될 예정이에요.
 - 백-엔드는 공개할 계획이 없어요.
-- `김포도시철도`는 잠시 보류 상태에요.

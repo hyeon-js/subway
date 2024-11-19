@@ -106,7 +106,7 @@
 
 <body>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
-    <div class=header>
+    <div class=header id=header>
         <a id="menu" onclick="openMenu();">
             <i class="material-icons">&#xE5D2;</i>
         </a>
@@ -158,7 +158,7 @@
         </table>
         </div>
     </div>
-    <div class=body>
+    <div class=body id=body>
         <div class="subway_map" id="subway_map">
             <!-- Subway Map will be created here via JS -->
         </div>
@@ -325,6 +325,11 @@
             });
 
             return result;
+        }
+
+        function removeHeader() {
+            document.getElementById('header').style.display = 'none';
+            document.getElementById('body').style.paddingTop = '20px';
         }
 
     </script>

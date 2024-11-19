@@ -177,7 +177,7 @@
         }
 
         function loadData(e) {
-            const lineId = name2id(e.innerHTML);
+            const lineId = name2id(e.innerHTML ? e.innerHTML : e);
             if (lineId == null) {
                 alert('아직 정보를 지원하지 않는 노선입니다');
                 return;

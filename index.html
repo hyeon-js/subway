@@ -229,11 +229,11 @@
             if (lineId == 1002) data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
                 if (i == 0 || (23 <= i && i <= 47)) {
-                    src += drawTrains(e.dn, 'up', pos, -30);
-                    src += drawTrains(e.up, 'dn', pos, 10);
+                    src += drawTrains(e.dn, 'up', pos, -35);
+                    src += drawTrains(e.up, 'dn', pos, 15);
                 } else {
-                    src += drawTrains(e.up, 'up', pos, -30);
-                    src += drawTrains(e.dn, 'dn', pos, 10);
+                    src += drawTrains(e.up, 'up', pos, -35);
+                    src += drawTrains(e.dn, 'dn', pos, 15);
                 }
             })
             else if (lineId == 1006) data.data.forEach((e, i) => {
@@ -248,8 +248,8 @@
             })
             else data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
-                src += drawTrains(e.up, 'up', pos, -30);
-                src += drawTrains(e.dn, 'dn', pos, 10);
+                src += drawTrains(e.up, 'up', pos, -35);
+                src += drawTrains(e.dn, 'dn', pos, 15);
             })
             document.getElementById("subway_map").innerHTML = map + src;
         }
@@ -265,22 +265,22 @@
 
         function drawMap(lineId, data) {
             if (!mapData[lineId]) mapData[lineId] = createMapData(data, lineId);
-            let src = '<svg viewBox="0 0 800 ' + mapData[lineId].height + '">';
+            let src = '<svg viewBox="0 0 700 ' + mapData[lineId].height + '">';
                 mapData[lineId].lines.forEach((e) => {
                 src += '<' + e.type + ' points="' + e.data + '" fill="none" stroke="' + mapData[lineId].color + '" />';
             });
             if (lineId == 1002) mapData[lineId].points.forEach((e) => {
                 if (e.sta=='(지선)') {
                     src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="10" />';
-                    src += '<text class=sub x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+                    src += '<text class=sub x=' + (e.x + 40) + ' y=' + e.y + '>' + e.sta + '</text>';
                 } else{
                     src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
-                    src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+                    src += '<text x=' + (e.x + 40) + ' y=' + e.y + '>' + e.sta + '</text>';
                 }
             });
             else mapData[lineId].points.forEach((e) => {
                 src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
-                src += '<text x=' + (e.x + 30) + ' y=' + e.y + '>' + e.sta + '</text>';
+                src += '<text x=' + (e.x + 40) + ' y=' + e.y + '>' + e.sta + '</text>';
             });
             return src;
         }
@@ -310,16 +310,16 @@
 
             const result = {};
             result.color = color;
-            result.height = data.length * 100 + 100;
+            result.height = data.length * 100;
             result.lines = [{
                 type: 'polyline',
-                data: '100,100 100,' + (result.height - 100)
+                data: '50,50 50,' + (result.height - 50)
             }];
             result.points = [];
             data.forEach((e, i) => {
                 result.points[i] = {
-                    x: 100,
-                    y: i * 100 + 100,
+                    x: 50,
+                    y: i * 100 + 50,
                     sta: e.stn
                 };
             });

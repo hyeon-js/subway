@@ -153,7 +153,7 @@
             <tr>
                 <td onclick='loadData(this);'>신림선</td>
                 <td onclick='loadData(this);'>김포골드라인</td>
-                <td onclick='loadData(this);'>&nbsp;</td>
+                <td onclick='loadData(this);'>GTX - A</td>
             </tr>
         </table>
         </div>
@@ -216,6 +216,7 @@
             lines['공항철도'] = 1500;
             lines['인천1호선'] = 1501;
             lines['인천2호선'] = 1502;
+            lines['GTX - A'] = 1601;
             return lines[name] === undefined ? null : lines[name];
         }
 
@@ -306,6 +307,7 @@
             colors['1500'] = '#0090D2';
             colors['1501'] = '#759CCE';
             colors['1502'] = '#F5A251';
+            colors['1601'] = '#9A6884';
             const color = colors[lineId] ? colors[lineId] : '#000000';
 
             const result = {};

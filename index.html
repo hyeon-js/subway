@@ -192,7 +192,7 @@
             fetch('https://api.hyeonjs.com/subway?region=' + region + '&line=' + lineId)
                 .then((response) => response.json())
                 .then((data) => {
-                    createMap(data, lineId);
+                    createMap(data, lineId, region);
                 });
             document.querySelector('div.drawer').style.maxHeight = '0px';
         }
@@ -228,19 +228,19 @@
                 lines['1호선'] = 1001;
                 lines['2호선'] = 1002;
                 lines['3호선'] = 1003;
-                lines['대경선'] = 11013;
+                lines['대경선'] = 1101;
             }
             return lines[name] === undefined ? null : lines[name];
         }
 
-        function createMap(data, lineId) {
+        function createMap(data, lineId, region) {
             if (data.error) {
                 alert('전철 운행 정보를 불러오지 못했어요');
                 return;
             }
-            const map = drawMap(lineId, data.data);
+            const map = drawMap(lineId, data.data, region);
             let src = '';
-            if (lineId == 1002) data.data.forEach((e, i) => {
+            if (region == 'seoul' && lineId == 1002) data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
                 if (i == 0 || (23 <= i && i <= 47)) {
                     src += drawTrains(e.dn, 'up', pos, -35);
@@ -250,7 +250,7 @@
                     src += drawTrains(e.dn, 'dn', pos, 15);
                 }
             })
-            else if (lineId == 1006) data.data.forEach((e, i) => {
+            else if (region == 'seoul' && lineId == 1006) data.data.forEach((e, i) => {
                 const pos = mapData[lineId].points[i];
                 e.up.forEach((e) => {
                     src += '<image xlink:href="./images/up.png" x="' + (pos.x + 15) + '" y="' + (pos.y - 20) + '" width="20px" opacity="0.9" />';
@@ -277,13 +277,17 @@
             return src;
         }
 
-        function drawMap(lineId, data) {
-            if (!mapData[lineId]) mapData[lineId] = createMapData(data, lineId);
+        function drawMap(lineId, data, region) {
+            if (region == 'seoul') {
+                if (!mapData[lineId]) mapData[lineId] = createMapData(data, lineId, region);
+            } else {
+                mapData[lineId] = createMapData(data, lineId, region);
+            }
             let src = '<svg viewBox="0 0 700 ' + mapData[lineId].height + '">';
                 mapData[lineId].lines.forEach((e) => {
                 src += '<' + e.type + ' points="' + e.data + '" fill="none" stroke="' + mapData[lineId].color + '" />';
             });
-            if (lineId == 1002) mapData[lineId].points.forEach((e) => {
+            if (region == 'seoul' && lineId == 1002) mapData[lineId].points.forEach((e) => {
                 if (e.sta=='(지선)') {
                     src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="10" />';
                     src += '<text class=sub x=' + (e.x + 40) + ' y=' + e.y + '>' + e.sta + '</text>';
@@ -299,28 +303,35 @@
             return src;
         }
         
-        function createMapData(data, lineId) {
+        function createMapData(data, lineId, region) {
             const colors = [];
-            colors['1003'] = '#EF7C1C';
-            colors['1004'] = '#00A4E3';
-            colors['1005'] = '#996CAC';
-            colors['1007'] = '#747F00';
-            colors['1008'] = '#E6186C';
-            colors['1009'] = '#BDB092';
-            colors['1102'] = '#FABE00';
-            colors['1103'] = '#D31145';
-            colors['1104'] = '#178C72';
-            colors['1105'] = '#56AD2D';
-            colors['1106'] = '#FD8100';
-            colors['1107'] = '#0054A6';
-            colors['1108'] = '#B7C450';
-            colors['1109'] = '#8FC31F';
-            colors['1110'] = '#AD8605';
-            colors['1111'] = '#6789CA';
-            colors['1500'] = '#0090D2';
-            colors['1501'] = '#759CCE';
-            colors['1502'] = '#F5A251';
-            colors['1601'] = '#9A6884';
+            if (region == 'seoul') {
+                colors['1003'] = '#EF7C1C';
+                colors['1004'] = '#00A4E3';
+                colors['1005'] = '#996CAC';
+                colors['1007'] = '#747F00';
+                colors['1008'] = '#E6186C';
+                colors['1009'] = '#BDB092';
+                colors['1102'] = '#FABE00';
+                colors['1103'] = '#D31145';
+                colors['1104'] = '#178C72';
+                colors['1105'] = '#56AD2D';
+                colors['1106'] = '#FD8100';
+                colors['1107'] = '#0054A6';
+                colors['1108'] = '#B7C450';
+                colors['1109'] = '#8FC31F';
+                colors['1110'] = '#AD8605';
+                colors['1111'] = '#6789CA';
+                colors['1500'] = '#0090D2';
+                colors['1501'] = '#759CCE';
+                colors['1502'] = '#F5A251';
+                colors['1601'] = '#9A6884';
+            } else if (region == 'daegu') {
+                colors['1001'] = '#D93F5C';
+                colors['1002'] = '#00AA80';
+                colors['1003'] = '#FFB100';
+                colors['1101'] = '#0054A6';
+            }
             const color = colors[lineId] ? colors[lineId] : '#000000';
 
             const result = {};

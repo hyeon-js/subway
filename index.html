@@ -181,14 +181,15 @@
             isOpened = !isOpened;
         }
 
-        function loadData(e) {
-            const lineId = name2id(e.innerHTML ? e.innerHTML : e);
+        function loadData(e, region) {
+            if (region == undefined) region = 'seoul';
+            const lineId = name2id(e.innerHTML ? e.innerHTML : e, region);
             if (lineId == null) {
                 alert('아직 정보를 지원하지 않는 노선입니다');
                 return;
             }
 
-            fetch('https://api.hyeonjs.com/subway?region=seoul&line=' + lineId)
+            fetch('https://api.hyeonjs.com/subway?region=' + region + '&line=' + lineId)
                 .then((response) => response.json())
                 .then((data) => {
                     createMap(data, lineId);
@@ -196,32 +197,39 @@
             document.querySelector('div.drawer').style.maxHeight = '0px';
         }
             
-        function name2id(name) {
+        function name2id(name, region) {
             const lines = {};
-            lines['1호선'] = 1001;
-            lines['2호선'] = 1002;
-            lines['3호선'] = 1003;
-            lines['4호선'] = 1004;
-            lines['5호선'] = 1005;
-            lines['6호선'] = 1006;
-            lines['7호선'] = 1007;
-            lines['8호선'] = 1008;
-            lines['9호선'] = 1009;
-            lines['경의·중앙선'] = 1101;
-            lines['수인·분당선'] = 1102;
-            lines['신분당선'] = 1103;
-            lines['경춘선'] = 1104;
-            lines['용인경전철'] = 1105;
-            lines['의정부경전철'] = 1106;
-            lines['경강선'] = 1107;
-            lines['우이신설선'] = 1108;
-            lines['서해선'] = 1109;
-            lines['김포골드라인'] = 1110;
-            lines['신림선'] = 1111;
-            lines['공항철도'] = 1500;
-            lines['인천1호선'] = 1501;
-            lines['인천2호선'] = 1502;
-            lines['GTX - A'] = 1601;
+            if (region == 'seoul') {
+                lines['1호선'] = 1001;
+                lines['2호선'] = 1002;
+                lines['3호선'] = 1003;
+                lines['4호선'] = 1004;
+                lines['5호선'] = 1005;
+                lines['6호선'] = 1006;
+                lines['7호선'] = 1007;
+                lines['8호선'] = 1008;
+                lines['9호선'] = 1009;
+                lines['경의·중앙선'] = 1101;
+                lines['수인·분당선'] = 1102;
+                lines['신분당선'] = 1103;
+                lines['경춘선'] = 1104;
+                lines['용인경전철'] = 1105;
+                lines['의정부경전철'] = 1106;
+                lines['경강선'] = 1107;
+                lines['우이신설선'] = 1108;
+                lines['서해선'] = 1109;
+                lines['김포골드라인'] = 1110;
+                lines['신림선'] = 1111;
+                lines['공항철도'] = 1500;
+                lines['인천1호선'] = 1501;
+                lines['인천2호선'] = 1502;
+                lines['GTX - A'] = 1601;
+            } else if (region == 'daegu') {
+                lines['1호선'] = 1001;
+                lines['2호선'] = 1002;
+                lines['3호선'] = 1003;
+                lines['대경선'] = 11013;
+            }
             return lines[name] === undefined ? null : lines[name];
         }
 
@@ -284,13 +292,13 @@
                     src += '<text x=' + (e.x + 40) + ' y=' + e.y + '>' + e.sta + '</text>';
                 }
             });
-            else mapData[lineId].points.forEach((e) => {
+            else mapData[lineId].points.forEach((e, i) => {
                 src += '<circle cx="' + e.x + '" cy="' + e.y + '" r="12" />';
-                src += '<text x=' + (e.x + 40) + ' y=' + e.y + '>' + e.sta + '</text>';
+                src += '<text x=' + (e.x + 40) + ' y=' + e.y + ' onclick=\'showTrains('+JSON.stringify(data[i])+');\'>' + e.sta + '</text>';
             });
             return src;
         }
-
+        
         function createMapData(data, lineId) {
             const colors = [];
             colors['1003'] = '#EF7C1C';
@@ -332,6 +340,15 @@
             });
 
             return result;
+        }
+
+        function showTrains(data) {
+            var str = [];
+            var types = ['일반', '급행', '직통']
+            data.up.forEach((e) => str.push((e.terminal ? e.terminal : '상') + '행 ' + types[e.type] + (e.sts ? ' ' + e.sts : '')));
+            data.dn.forEach((e) => str.push((e.terminal ? e.terminal : '하') + '행 ' + types[e.type] + (e.sts ? ' ' + e.sts : '')));
+            if (str.length == 0) alert('열차 없음');
+            else alert(str.join('\n'));
         }
 
         function removeHeader() {

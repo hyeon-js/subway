@@ -158,6 +158,16 @@
                 <td onclick='loadData(this);'>GTX - A</td>
             </tr>
             <tr>
+                <td onclick='loadData(this, "busan");'>부산1호선</td>
+                <td onclick='loadData(this, "busan");'>부산2호선</td>
+                <td onclick='loadData(this, "busan");'>부산3호선</td>
+            </tr>
+            <tr>
+                <td onclick='loadData(this, "busan");'>부산4호선</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
                 <td onclick='loadData(this, "daegu");'>대구1호선</td>
                 <td onclick='loadData(this, "daegu");'>대구2호선</td>
                 <td onclick='loadData(this, "daegu");'>대구3호선</td>
@@ -178,7 +188,7 @@
             </table>
         </div>
         <hr>
-        <p>© 2023-2024 Hyeon.js, All rights reserved.</p>
+        <p>© 2023-2025 Hyeon.js, All rights reserved.</p>
     </div>
     <script>
         var isOpened = false;
@@ -234,6 +244,11 @@
                 lines['인천1호선'] = 1501;
                 lines['인천2호선'] = 1502;
                 lines['GTX - A'] = 1601;
+            } else if (region == 'busan') {
+                lines['부산1호선'] = 1001;
+                lines['부산2호선'] = 1002;
+                lines['부산3호선'] = 1003;
+                lines['부산4호선'] = 1004;
             } else if (region == 'daegu') {
                 lines['1호선'] = 1001;
                 lines['2호선'] = 1002;

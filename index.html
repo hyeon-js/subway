@@ -118,62 +118,62 @@
         <div class=drawer_inner>
         <table class=line_list>
             <tr>
-                <td onclick='loadData(this);'>1호선</td>
-                <td onclick='loadData(this);'>2호선</td>
-                <td onclick='loadData(this);'>3호선</td>
+                <td onclick='loadData("seoul", 1001);'>1호선</td>
+                <td onclick='loadData("seoul", 1002);'>2호선</td>
+                <td onclick='loadData("seoul", 1003);'>3호선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>4호선</td>
-                <td onclick='loadData(this);'>5호선</td>
-                <td onclick='loadData(this);'>6호선</td>
+                <td onclick='loadData("seoul", 1004);'>4호선</td>
+                <td onclick='loadData("seoul", 1005);'>5호선</td>
+                <td onclick='loadData("seoul", 1006);'>6호선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>7호선</td>
-                <td onclick='loadData(this);'>8호선</td>
-                <td onclick='loadData(this);'>9호선</td>
+                <td onclick='loadData("seoul", 1007);'>7호선</td>
+                <td onclick='loadData("seoul", 1008);'>8호선</td>
+                <td onclick='loadData("seoul", 1009);'>9호선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>경의·중앙선</td>
-                <td onclick='loadData(this);'>수인·분당선</td>
-                <td onclick='loadData(this);'>신분당선</td>
+                <td onclick='loadData("seoul", 1101);'>경의·중앙선</td>
+                <td onclick='loadData("seoul", 1102);'>수인·분당선</td>
+                <td onclick='loadData("seoul", 1103);'>신분당선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>경춘선</td>
-                <td onclick='loadData(this);'>경강선</td>
-                <td onclick='loadData(this);'>서해선</td>
+                <td onclick='loadData("seoul", 1104);'>경춘선</td>
+                <td onclick='loadData("seoul", 1107);'>경강선</td>
+                <td onclick='loadData("seoul", 1109);'>서해선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>우이신설선</td>
-                <td onclick='loadData(this);'>용인경전철</td>
-                <td onclick='loadData(this);'>의정부경전철</td>
+                <td onclick='loadData("seoul", 1108);'>우이신설선</td>
+                <td onclick='loadData("seoul", 1105);'>용인경전철</td>
+                <td onclick='loadData("seoul", 1106);'>의정부경전철</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>인천1호선</td>
-                <td onclick='loadData(this);'>인천2호선</td>
-                <td onclick='loadData(this);'>공항철도</td>
+                <td onclick='loadData("seoul", 1501);'>인천1호선</td>
+                <td onclick='loadData("seoul", 1502);'>인천2호선</td>
+                <td onclick='loadData("seoul", 1500);'>공항철도</td>
             </tr>
             <tr>
-                <td onclick='loadData(this);'>신림선</td>
-                <td onclick='loadData(this);'>김포골드라인</td>
-                <td onclick='loadData(this);'>GTX - A</td>
+                <td onclick='loadData("seoul", 1111);'>신림선</td>
+                <td onclick='loadData("seoul", 1110);'>김포골드라인</td>
+                <td onclick='loadData("seoul", 1601);'>GTX - A</td>
             </tr>
             <tr>
-                <td onclick='loadData(this, "busan");'>부산1호선</td>
-                <td onclick='loadData(this, "busan");'>부산2호선</td>
-                <td onclick='loadData(this, "busan");'>부산3호선</td>
+                <td onclick='loadData("busan", 1001);'>부산1호선</td>
+                <td onclick='loadData("busan", 1002);'>부산2호선</td>
+                <td onclick='loadData("busan", 1003);'>부산3호선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this, "busan");'>부산4호선</td>
+                <td onclick='loadData("busan", 1004);'>부산4호선</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td onclick='loadData(this, "daegu");'>대구1호선</td>
-                <td onclick='loadData(this, "daegu");'>대구2호선</td>
-                <td onclick='loadData(this, "daegu");'>대구3호선</td>
+                <td onclick='loadData("daegu", 1001);'>대구1호선</td>
+                <td onclick='loadData("daegu", 1002);'>대구2호선</td>
+                <td onclick='loadData("daegu", 1003);'>대구3호선</td>
             </tr>
             <tr>
-                <td onclick='loadData(this, "daegu");'>대경선</td>
+                <td onclick='loadData("daegu", 1101);'>대경선</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
@@ -201,9 +201,7 @@
             isOpened = !isOpened;
         }
 
-        function loadData(e, region) {
-            if (region == undefined) region = 'seoul';
-            const lineId = name2id(e.innerHTML ? e.innerHTML : e, region);
+        function loadData(region, lineId) {
             if (lineId == null) {
                 alert('아직 정보를 지원하지 않는 노선입니다');
                 return;
@@ -216,51 +214,7 @@
                 });
             document.querySelector('div.drawer').style.maxHeight = '0px';
         }
-            
-        function name2id(name, region) {
-            const lines = {};
-            if (region == 'seoul') {
-                lines['1호선'] = 1001;
-                lines['2호선'] = 1002;
-                lines['3호선'] = 1003;
-                lines['4호선'] = 1004;
-                lines['5호선'] = 1005;
-                lines['6호선'] = 1006;
-                lines['7호선'] = 1007;
-                lines['8호선'] = 1008;
-                lines['9호선'] = 1009;
-                lines['경의·중앙선'] = 1101;
-                lines['수인·분당선'] = 1102;
-                lines['신분당선'] = 1103;
-                lines['경춘선'] = 1104;
-                lines['용인경전철'] = 1105;
-                lines['의정부경전철'] = 1106;
-                lines['경강선'] = 1107;
-                lines['우이신설선'] = 1108;
-                lines['서해선'] = 1109;
-                lines['김포골드라인'] = 1110;
-                lines['신림선'] = 1111;
-                lines['공항철도'] = 1500;
-                lines['인천1호선'] = 1501;
-                lines['인천2호선'] = 1502;
-                lines['GTX - A'] = 1601;
-            } else if (region == 'busan') {
-                lines['부산1호선'] = 1001;
-                lines['부산2호선'] = 1002;
-                lines['부산3호선'] = 1003;
-                lines['부산4호선'] = 1004;
-            } else if (region == 'daegu') {
-                lines['1호선'] = 1001;
-                lines['2호선'] = 1002;
-                lines['3호선'] = 1003;
-                lines['대경선'] = 1101;
-                lines['대구1호선'] = 1001;
-                lines['대구2호선'] = 1002;
-                lines['대구3호선'] = 1003;
-            }
-            return lines[name] === undefined ? null : lines[name];
-        }
-
+        
         function createMap(data, lineId, region) {
             if (data.error) {
                 alert('전철 운행 정보를 불러오지 못했어요');

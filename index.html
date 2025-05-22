@@ -174,7 +174,7 @@
             </tr>
             <tr>
                 <td onclick='loadData("daegu", 1101);'>대경선</td>
-                <td>&nbsp;</td>
+                <td onclick='loadData("daejeon", 1001);'>대전도시철도</td>
                 <td>&nbsp;</td>
             </tr>
         </table>
@@ -320,6 +320,8 @@
                 colors['1002'] = '#00AA80';
                 colors['1003'] = '#FFB100';
                 colors['1101'] = '#0054A6';
+            } else if (region == 'daejeon') {
+                colors['1001'] = '#007448';
             }
             const color = colors[lineId] ? colors[lineId] : '#000000';
 

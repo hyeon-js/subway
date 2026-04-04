@@ -159,8 +159,8 @@
             </tr>
             <tr>
                 <td onclick='loadData(this, "daegu");'>대구1호선</td>
-                <!-- <td onclick='loadData(this);'>대구2호선</td>
-                <td onclick='loadData(this);'>대구3호선</td> -->
+                <td onclick='loadData(this, "daegu");'>대구2호선</td>
+                <td onclick='loadData(this, "daegu");'>대구3호선</td>
             </tr>
         </table>
         </div>
@@ -230,11 +230,13 @@
                 lines['인천2호선'] = 1502;
                 lines['GTX - A'] = 1601;
             } else if (region == 'daegu') {
-                lines['대구1호선'] = 1001;
                 lines['1호선'] = 1001;
                 lines['2호선'] = 1002;
                 lines['3호선'] = 1003;
                 lines['대경선'] = 1101;
+                lines['대구1호선'] = 1001;
+                lines['대구2호선'] = 1002;
+                lines['대구3호선'] = 1003;
             }
             return lines[name] === undefined ? null : lines[name];
         }
